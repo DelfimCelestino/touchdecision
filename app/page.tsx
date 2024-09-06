@@ -1,8 +1,12 @@
 "use client"
 
+import CreatorDialog from "@/components/creator-dialog"
+import InfoModal from "@/components/info-modal"
+import InstallModal from "@/components/install-modal"
 import { Button } from "@/components/ui/button"
-import { Info } from "lucide-react"
+import { CircleHelpIcon, Info } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
+import { toast } from "sonner"
 
 interface Touch {
   x: number
@@ -17,6 +21,18 @@ export default function FingerGame() {
   const [hasStarted, setHasStarted] = useState<boolean>(false)
   const [selectedFinger, setSelectedFinger] = useState<Touch | null>(null)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
+  const [openInfo, setOpenInfo] = useState(false)
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      const handleServiceWorker = async () => {
+        await navigator.serviceWorker.register("/service-worker.js")
+      }
+
+      handleServiceWorker()
+    }
+  }, [])
 
   useEffect(() => {
     if (showStartMessage) {
@@ -83,7 +99,17 @@ export default function FingerGame() {
 
   return (
     <div className="absolute inset-0 flex items-center justify-center overflow-hidden bg-background">
-      <Info className="absolute right-4 top-4 h-6 w-6 text-zinc-50" />
+      <InstallModal />
+      <InfoModal open={openInfo} onOpenChange={setOpenInfo} />
+      <CreatorDialog open={open} onOpenChange={setOpen} />
+      <CircleHelpIcon
+        onClick={() => setOpenInfo(true)}
+        className="fixed left-4 top-4 z-30 h-6 w-6 text-zinc-50"
+      />
+      <Info
+        onClick={() => setOpen(true)}
+        className="fixed right-4 top-4 z-30 h-6 w-6 text-zinc-50"
+      />
 
       {!showStartMessage && touches.length < 2 && (
         <h1 className="text-center text-2xl">Pressionem seus dedos na tela</h1>
