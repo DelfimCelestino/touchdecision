@@ -78,6 +78,7 @@ export default function FingerGame() {
     if (!showStartMessage && hasStarted && touches.length > 0) {
       setIsChoosing(true)
 
+      // Intervalo para alternar as cores
       const colorInterval = setInterval(() => {
         setCurrentColor((prevColor) =>
           prevColor === "bg-red-500" ? "bg-green-500" : "bg-red-500",
@@ -160,7 +161,7 @@ export default function FingerGame() {
             top: `${selectedFinger.y - 100}px`,
           }}
         >
-          <p>Selecionado!</p>
+          <p>Selecionado.</p>
         </div>
       )}
 
