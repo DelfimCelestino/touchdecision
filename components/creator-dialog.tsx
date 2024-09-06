@@ -37,8 +37,8 @@ const CreatorDialog = ({ open, onOpenChange }: DialogProps) => {
           </Avatar>
           <h1>Delfim Celestino</h1>
           <DialogDescription>
-            "Criador do Touch Decision – Porque, às vezes, a decisão mais
-            difícil é escolher qual dedo destacar!"
+            &quot;Criador do Touch Decision – Porque, às vezes, a decisão mais
+            difícil é escolher qual dedo destacar!&quot;
           </DialogDescription>
         </DialogHeader>
 

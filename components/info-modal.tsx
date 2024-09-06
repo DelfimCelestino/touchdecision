@@ -33,13 +33,13 @@ const InfoModal = ({ open, onOpenChange }: DialogProps) => {
         <DialogHeader className="flex items-center justify-center">
           <h1 className="text-2xl font-bold">Sobre o Touch Decision</h1>
           <DialogDescription className="mt-2 text-center">
-            "Se você já se pegou em um dilema sobre quem vai pagar a conta ou
-            quem vai enfrentar o desafio de hoje, o Touch Decision está aqui
+            &quot;Se você já se pegou em um dilema sobre quem vai pagar a conta
+            ou quem vai enfrentar o desafio de hoje, o Touch Decision está aqui
             para ajudar! Com este jogo, tudo o que você precisa fazer é colocar
             seus dedos na tela. O Touch Decision vai decidir aleatoriamente quem
             vai se aventurar ou pagar a conta! É a maneira mais divertida e
             justa de resolver disputas e tomar decisões. Prepare-se para a
-            diversão e deixe a sorte decidir!"
+            diversão e deixe a sorte decidir!&quot;
           </DialogDescription>
         </DialogHeader>
 
