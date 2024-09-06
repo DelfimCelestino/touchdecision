@@ -19,4 +19,21 @@ Touch Decision é um jogo interativo desenvolvido com React e Tailwind CSS. O ob
 
 1. **Clone o repositório**:
    ```bash
-   git clone https://github.com/seu-usuario/touch-decision.git
+   git clone https://github.com/delfimcelestino/touch-decision.git
+
+2. **Navegue até o diretório do projeto:**:
+   ```bash
+   cd touch-decision
+
+3. **Instale as dependências:**:
+   ```bash
+   npm install
+
+4. **Execute o projeto:**:
+   ```bash
+   npm run dev
+
+5. **Abra o navegador e acesse:**:
+   ```bash
+   [npm run dev](http://localhost:3000
+)
