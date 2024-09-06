@@ -18,6 +18,12 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "Touch Decision",
   description: "Prepare-se para a diversão e deixe a sorte decidir!",
+  manifest: "/manifest.json",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/icon512_rounded.png",
+    apple: "/icon512_maskable.png",
+  },
 }
 
 export default function RootLayout({
