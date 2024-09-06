@@ -35,5 +35,4 @@ Touch Decision é um jogo interativo desenvolvido com React e Tailwind CSS. O ob
 
 5. **Abra o navegador e acesse:**:
    ```bash
-   [npm run dev](http://localhost:3000
-)
+   [npm run dev](http://localhost:3000)
