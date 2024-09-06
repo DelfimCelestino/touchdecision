@@ -6,7 +6,6 @@ import InstallModal from "@/components/install-modal"
 import { Button } from "@/components/ui/button"
 import { CircleHelpIcon, Info } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
-import { toast } from "sonner"
 
 interface Touch {
   x: number
