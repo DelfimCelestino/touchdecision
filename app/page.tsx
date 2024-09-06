@@ -22,6 +22,9 @@ export default function FingerGame() {
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
   const [openInfo, setOpenInfo] = useState(false)
   const [open, setOpen] = useState(false)
+  const [isChoosing, setIsChoosing] = useState(false)
+  const [currentColor, setCurrentColor] = useState("bg-red-500")
+  const colorIntervalRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
     if ("serviceWorker" in navigator) {
@@ -62,6 +65,15 @@ export default function FingerGame() {
           id: touch.identifier,
         }))
         setTouches(newTouches)
+
+        // Começa a alternância de cores quando os dedos tocarem na tela
+        if (!colorIntervalRef.current) {
+          colorIntervalRef.current = setInterval(() => {
+            setCurrentColor((prevColor) =>
+              prevColor === "bg-red-500" ? "bg-green-500" : "bg-red-500",
+            )
+          }, 500)
+        }
       }
     }
 
@@ -74,17 +86,29 @@ export default function FingerGame() {
 
   useEffect(() => {
     if (!showStartMessage && hasStarted && touches.length > 0) {
+      setIsChoosing(true)
+
       const chooseFinger = () => {
         const randomIndex = Math.floor(Math.random() * touches.length)
         setSelectedFinger(touches[randomIndex])
+        setIsChoosing(false)
+        if (colorIntervalRef.current) {
+          clearInterval(colorIntervalRef.current)
+          colorIntervalRef.current = null
+        }
       }
 
       const chooseFingerTimeout = setTimeout(() => {
         chooseFinger()
         setHasStarted(false)
-      }, 1000)
+      }, 3000) // Escolhe o dedo após 3 segundos
 
-      return () => clearTimeout(chooseFingerTimeout)
+      return () => {
+        clearTimeout(chooseFingerTimeout)
+        if (colorIntervalRef.current) {
+          clearInterval(colorIntervalRef.current)
+        }
+      }
     }
   }, [showStartMessage, hasStarted, touches])
 
@@ -94,6 +118,11 @@ export default function FingerGame() {
     setHasStarted(false)
     setShowStartMessage(true)
     setCounter(5)
+    setCurrentColor("bg-red-500")
+    if (colorIntervalRef.current) {
+      clearInterval(colorIntervalRef.current)
+      colorIntervalRef.current = null
+    }
   }
 
   return (
@@ -123,7 +152,9 @@ export default function FingerGame() {
 
       {touches.map((touch, index) => (
         <div
-          className="absolute flex h-[200px] w-[200px] items-center justify-center rounded-full bg-red-500 text-2xl font-bold text-zinc-50"
+          className={`absolute flex h-[200px] w-[200px] items-center justify-center rounded-full ${
+            isChoosing ? currentColor : "bg-red-500"
+          } text-2xl font-bold text-zinc-50`}
           key={touch.id}
           style={{
             left: `${touch.x - 100}px`,
@@ -142,7 +173,7 @@ export default function FingerGame() {
             top: `${selectedFinger.y - 100}px`,
           }}
         >
-          <p>Selecionado!</p>
+          <p>Selecionado.</p>
         </div>
       )}
 
